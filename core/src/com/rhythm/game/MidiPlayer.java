@@ -52,7 +52,7 @@ public class MidiPlayer {
 	
 	public float getPosition(){
 		// Gets the position in the sequence in seconds. 0.40 is the offset, might change for each device
-		return this.sequencer.getMicrosecondPosition() / 1000000f * ((float) this.originalBPM / this.bpm) - 0.40f;
+		return this.sequencer.getMicrosecondPosition() / 1000000f * ((float) this.originalBPM / this.bpm) - 0.2f;
 	}
 	
 	public void start(){

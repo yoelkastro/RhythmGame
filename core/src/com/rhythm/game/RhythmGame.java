@@ -19,7 +19,7 @@ public class RhythmGame extends ApplicationAdapter implements InputProcessor {
 	ShapeRenderer sr;
 	float hitStunStart = -10;
 	
-	//MusicPlayer mp;
+	//MusicPlayer mp1;
 	MidiPlayer mp;
 	
 	public boolean isStunned(){
@@ -33,10 +33,11 @@ public class RhythmGame extends ApplicationAdapter implements InputProcessor {
 		font.setColor(Color.BLACK);
 		sr = new ShapeRenderer();
 		
-		//mp = new MusicPlayer(Gdx.audio.newMusic(Gdx.files.internal("audio/metronome.mp3")), 60);
+		//mp1 = new MusicPlayer(Gdx.audio.newMusic(Gdx.files.internal("audio/metronome.mp3")), 60);
 		//mp.start();
 		
-		mp = new MidiPlayer(new File("/Users/yoelkastro/Desktop/metronome.mid"), 120);
+		System.out.println();
+		mp = new MidiPlayer(new File("assets/audio/metronome.mid"), 120);
 		
 		Gdx.input.setInputProcessor(this);
 		
