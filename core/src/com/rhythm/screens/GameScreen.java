@@ -11,32 +11,35 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
-import com.rhythm.game.InputHandler;
+import com.rhythm.game.GameInputHandler;
 import com.rhythm.game.MidiPlayer;
 import com.rhythm.game.Player;
+import com.rhythm.game.RhythmGame;
 
 public class GameScreen implements Screen {
 
-	private SpriteBatch batch;
 	private BitmapFont font;
 	private ShapeRenderer sr;
 	
 	private Player p1 = new Player();
 	
-	private InputHandler ih;
+	private GameInputHandler ih;
+	
+	private RhythmGame rg;
 	
 	private int screenWidth;
 	private int screenHeight;
 	
-	public GameScreen(){
-		batch = new SpriteBatch();
+	public GameScreen(RhythmGame rg){
+		this.rg = rg;
+		
 		font = new BitmapFont();
 		font.setColor(Color.BLACK);
 		sr = new ShapeRenderer();
 		
 		MidiPlayer.initialize(new File("assets/audio/metronome.mid"), 120);
 		
-		ih = new InputHandler(p1, null);
+		ih = new GameInputHandler(p1, null);
 		
 		Gdx.input.setInputProcessor((InputProcessor) ih);
 		
@@ -55,9 +58,9 @@ public class GameScreen implements Screen {
 		Gdx.gl.glClearColor(1, p1.isStunned()? 0:1, p1.isStunned()? 0:1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
-		batch.begin();
-		font.draw(batch, "" + p1.getPoints(), 200, 300);
-		batch.end();
+		rg.batch.begin();
+		font.draw(rg.batch, "" + p1.getPoints(), 200, 300);
+		rg.batch.end();
 		
 		float dtb = MidiPlayer.distanceToBeat();
 		
@@ -82,7 +85,6 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void dispose() {
-		batch.dispose();
 		font.dispose();
 	}
 

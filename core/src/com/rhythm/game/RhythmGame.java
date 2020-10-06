@@ -1,15 +1,18 @@
 package com.rhythm.game;
 
 import com.badlogic.gdx.Game;
-import com.rhythm.screens.GameScreen;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.rhythm.screens.MainMenuScreen;
 
 public class RhythmGame extends Game {
 	
+	public SpriteBatch batch;
+	
 	@Override
 	public void create () {
+		batch = new SpriteBatch();
 		
-		this.setScreen(new GameScreen());
-		
+		this.setScreen(new MainMenuScreen(this));
 	}
 
 	@Override
@@ -19,8 +22,7 @@ public class RhythmGame extends Game {
 	
 	@Override
 	public void dispose () {
-
+		batch.dispose();
 	}
-
 	
 }

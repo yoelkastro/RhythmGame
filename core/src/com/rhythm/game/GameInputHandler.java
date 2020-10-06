@@ -2,11 +2,11 @@ package com.rhythm.game;
 
 import com.badlogic.gdx.InputProcessor;
 
-public class InputHandler implements InputProcessor {
+public class GameInputHandler implements InputProcessor {
 
 	Player p1, p2;
 	
-	public InputHandler(Player p1, Player p2){
+	public GameInputHandler(Player p1, Player p2){
 		this.p1 = p1;
 		this.p2 = p2;
 	}
