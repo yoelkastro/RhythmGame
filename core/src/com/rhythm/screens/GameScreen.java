@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.rhythm.game.BeatIndicator;
 import com.rhythm.game.GameInputHandler;
 import com.rhythm.game.MidiPlayer;
 import com.rhythm.game.Player;
@@ -22,13 +23,11 @@ public class GameScreen implements Screen {
 	private ShapeRenderer sr;
 	
 	private Player p1 = new Player();
+	private BeatIndicator bi = new BeatIndicator();
 	
 	private GameInputHandler ih;
 	
 	private RhythmGame rg;
-	
-	private int screenWidth;
-	private int screenHeight;
 	
 	public GameScreen(RhythmGame rg){
 		this.rg = rg;
@@ -44,9 +43,6 @@ public class GameScreen implements Screen {
 		Gdx.input.setInputProcessor((InputProcessor) ih);
 		
 		MidiPlayer.start();
-		
-		screenWidth = Gdx.graphics.getWidth();
-		screenHeight = Gdx.graphics.getHeight();
 	}
 	
 	@Override
@@ -59,15 +55,10 @@ public class GameScreen implements Screen {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		rg.batch.begin();
-		font.draw(rg.batch, "" + p1.getPoints(), 200, 300);
+		font.draw(rg.batch, "" + p1.getPoints(), Gdx.graphics.getWidth() / 100f, Gdx.graphics.getHeight() * 0.95f);
 		rg.batch.end();
 		
-		float dtb = MidiPlayer.distanceToBeat();
-		
-		sr.begin(ShapeType.Filled);
-		sr.setColor(0, 0, (dtb < 0.05f || dtb > 0.95f)? 1:0, 0);
-		sr.rect(200, 200, 50, 50);
-		sr.end();
+		bi.render(sr);
 		
 	}
 
